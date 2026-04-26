@@ -1,0 +1,1554 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Inter:ital,wght@1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  background: #020617;
+  color: white;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-style: italic;
+}
+
+a {
+  text-decoration: none;
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: #020617;
+  color: white;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+.videoIntro {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #020617;
+}
+
+.introVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: videoZoom 18s ease-in-out infinite alternate;
+  z-index: -4;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0.72)),
+    radial-gradient(circle at center, rgba(212, 175, 55, 0.14), transparent 34%),
+    linear-gradient(90deg, rgba(2, 6, 23, 0.82), rgba(2, 6, 23, 0.36), rgba(2, 6, 23, 0.82));
+  z-index: -3;
+}
+
+.videoGrain {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.1;
+  z-index: -2;
+}
+
+.introContent {
+  width: min(1180px, calc(100% - 48px));
+  text-align: center;
+  padding: 120px 0 80px;
+}
+
+.introKicker {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+  color: #facc15;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  animation: fadeUp 0.9s ease both;
+  backdrop-filter: blur(10px);
+}
+
+.introTitle {
+  max-width: none;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #ffffff;
+  text-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  animation: titleReveal 1.2s ease both 0.15s;
+}
+
+.introSubtitle {
+  margin: 28px auto 0;
+  max-width: 1100px;
+  font-size: clamp(16px, 2vw, 26px);
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #facc15;
+  line-height: 1.4;
+  animation: fadeUp 0.9s ease both 0.45s;
+}
+
+.introText {
+  max-width: 760px;
+  margin: 24px auto 0;
+  color: #e2e8f0;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.8;
+  font-weight: 400;
+  animation: fadeUp 0.9s ease both 0.65s;
+}
+
+.introButton {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 30px;
+  border-radius: 999px;
+  color: #050816;
+  background: linear-gradient(135deg, #d4af37, #facc15);
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 18px 50px rgba(212, 175, 55, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  animation: fadeUp 0.9s ease both 0.85s;
+}
+
+.introButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 60px rgba(212, 175, 55, 0.35);
+  background: linear-gradient(135deg, #facc15, #fde047);
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  display: flex;
+  justify-content: center;
+  padding-top: 9px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease both 1.25s;
+}
+
+.scrollCue span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #d4af37;
+  animation: scrollDot 1.5s ease-in-out infinite;
+}
+
+.hero,
+.aboutSection,
+.visionSection,
+.projectsSection,
+.topGSection,
+.skillsSection,
+.servicesSection,
+.philosophySection,
+.contactSection,
+.footer {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero::before,
+.aboutSection::before,
+.visionSection::before,
+.projectsSection::before,
+.topGSection::before,
+.skillsSection::before,
+.servicesSection::before,
+.philosophySection::before,
+.contactSection::before {
+  position: absolute;
+  top: 36px;
+  right: -40px;
+  z-index: 0;
+  font-size: clamp(90px, 18vw, 280px);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -12px;
+  color: rgba(255, 255, 255, 0.035);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero::before {
+  content: 'PRIEST';
+}
+
+.aboutSection::before {
+  content: 'VISION';
+}
+
+.visionSection::before {
+  content: 'SYSTEMS';
+}
+
+.projectsSection::before {
+  content: 'BUILD';
+}
+
+.topGSection::before {
+  content: 'TOP G';
+}
+
+.skillsSection::before {
+  content: 'SKILLS';
+}
+
+.servicesSection::before {
+  content: 'SERVE';
+}
+
+.philosophySection::before {
+  content: 'WISDOM';
+}
+
+.contactSection::before {
+  content: 'CONNECT';
+}
+
+.hero::after,
+.aboutSection::after,
+.visionSection::after,
+.projectsSection::after,
+.topGSection::after,
+.skillsSection::after,
+.servicesSection::after,
+.philosophySection::after,
+.contactSection::after {
+  content: '</>  { }  ∑  π  λ  01  AI  &&  ||  f(x)  Δ  ∞  npm  React  API  <>  1010  √  ≠  ===  async  await  data  map()  0101  SQL  Cloud  Logic';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(18px, 4vw, 58px);
+  font-weight: 800;
+  line-height: 1.8;
+  letter-spacing: 12px;
+  text-align: center;
+  color: rgba(212, 175, 55, 0.055);
+  opacity: 0.75;
+  transform: rotate(-8deg) scale(1.1);
+  filter: blur(0.2px);
+}
+
+.hero > *,
+.aboutSection > *,
+.visionSection > *,
+.projectsSection > *,
+.topGSection > *,
+.skillsSection > *,
+.servicesSection > *,
+.philosophySection > *,
+.contactSection > *,
+.footer > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero {
+  min-height: 100vh;
+  padding: 130px 72px 32px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.14), transparent 35%),
+    linear-gradient(135deg, rgba(3, 7, 18, 0.92) 0%, rgba(5, 8, 22, 0.9) 45%, rgba(2, 6, 23, 0.94) 100%);
+}
+
+/* =========================
+   NAVBAR + MOBILE MENU
+========================= */
+
+.navbar {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 100;
+  width: min(1180px, calc(100% - 48px));
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 22px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
+  animation: navDrop 0.9s ease both;
+}
+
+.navTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.menuButton {
+  display: none;
+  width: 46px;
+  height: 42px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  place-items: center;
+  padding: 10px;
+}
+
+.menuButton span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #facc15;
+  border-radius: 999px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.menuButtonOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menuButtonOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuButtonOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.navLinks {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navLinks a {
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: #d4af37;
+}
+
+.heroContent {
+  max-width: 1000px;
+  margin: auto 0;
+  padding: 80px 0;
+  animation: fadeUp 0.9s ease both 0.15s;
+}
+
+.eyebrow {
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+h1 {
+  max-width: 950px;
+  font-size: clamp(44px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -4px;
+  margin: 0;
+}
+
+.heroText {
+  max-width: 720px;
+  margin-top: 28px;
+  color: #cbd5e1;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 38px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+}
+
+.primaryBtn {
+  background: #d4af37;
+  color: #050816;
+}
+
+.primaryBtn:hover {
+  background: #facc15;
+}
+
+.secondaryBtn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.secondaryBtn:hover {
+  border-color: #d4af37;
+}
+
+.aboutSection,
+.visionSection,
+.projectsSection,
+.topGSection,
+.skillsSection,
+.servicesSection,
+.philosophySection,
+.contactSection {
+  padding: 120px 72px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aboutSection {
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 30%),
+    rgba(2, 6, 23, 0.86);
+}
+
+.visionSection {
+  background:
+    radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.14), transparent 35%),
+    rgba(3, 7, 18, 0.88);
+}
+
+.projectsSection {
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.12), transparent 35%),
+    rgba(2, 6, 23, 0.88);
+}
+
+.topGSection {
+  padding-top: 130px;
+  padding-bottom: 130px;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.15), transparent 34%),
+    rgba(5, 8, 22, 0.88);
+}
+
+.skillsSection {
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34%),
+    rgba(2, 6, 23, 0.88);
+}
+
+.servicesSection {
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.12), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.13), transparent 34%),
+    rgba(3, 7, 18, 0.88);
+}
+
+.philosophySection {
+  padding-top: 130px;
+  padding-bottom: 130px;
+  background:
+    radial-gradient(circle at center, rgba(212, 175, 55, 0.12), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.12), transparent 34%),
+    rgba(2, 6, 23, 0.88);
+}
+
+.contactSection {
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.16), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.18), transparent 34%),
+    rgba(3, 7, 18, 0.9);
+}
+
+.sectionLabel {
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.aboutGrid,
+.visionContent,
+.projectsHeader,
+.topGContent,
+.skillsHeader,
+.servicesHeader,
+.philosophyGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.projectsHeader,
+.skillsHeader,
+.servicesHeader {
+  grid-template-columns: 1fr 0.75fr;
+  align-items: end;
+  margin-bottom: 64px;
+}
+
+.aboutSection h2,
+.visionSection h2,
+.projectsSection h2,
+.topGSection h2,
+.skillsSection h2,
+.servicesSection h2,
+.philosophySection h2,
+.contactSection h2 {
+  max-width: 900px;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.aboutText p,
+.visionPanel p,
+.projectsHeader p,
+.skillsHeader p,
+.servicesHeader p,
+.topGPanel p,
+.philosophyText p,
+.contactIntro {
+  color: #cbd5e1;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0 0 22px;
+}
+
+.aboutText p {
+  font-size: 19px;
+  margin-bottom: 24px;
+}
+
+.photoShowcase {
+  margin-top: 78px;
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 42px;
+  align-items: center;
+  padding: 28px;
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.11), rgba(37, 99, 235, 0.08)),
+    rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.32);
+}
+
+.photoFrame {
+  position: relative;
+  min-height: 520px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.35);
+}
+
+.photoFrame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(2, 6, 23, 0.45), transparent 45%),
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.2), transparent 34%);
+  pointer-events: none;
+}
+
+.photoFrame img {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%) contrast(1.08);
+  transform: scale(1.02);
+  transition: transform 0.7s ease, filter 0.7s ease;
+}
+
+.photoShowcase:hover .photoFrame img {
+  transform: scale(1.08);
+  filter: grayscale(35%) contrast(1.08);
+}
+
+.photoContent span {
+  color: #facc15;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.photoContent h3 {
+  max-width: 780px;
+  font-size: clamp(30px, 4vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin: 20px 0 22px;
+}
+
+.photoContent p {
+  max-width: 720px;
+  color: #cbd5e1;
+  font-size: 19px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.identityCards,
+.topGCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 72px;
+}
+
+.visionCards,
+.projectGrid,
+.servicesGrid {
+  display: grid;
+  gap: 22px;
+  margin-top: 72px;
+}
+
+.visionCards {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.projectGrid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 0;
+  gap: 24px;
+}
+
+.servicesGrid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 0;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.identityCard,
+.visionCard,
+.projectCard,
+.topGCard,
+.skillCategory,
+.serviceCard,
+.visionPanel,
+.topGPanel,
+.toolsBox,
+.philosophyText,
+.photoShowcase {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  backface-visibility: visible;
+  animation: cardEnter 0.8s ease both;
+  cursor: pointer;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.identityCard,
+.visionCard,
+.projectCard,
+.topGCard,
+.skillCategory,
+.serviceCard,
+.visionPanel,
+.topGPanel,
+.toolsBox,
+.philosophyText {
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.identityCard:hover,
+.visionCard:hover,
+.projectCard:hover,
+.topGCard:hover,
+.skillCategory:hover,
+.serviceCard:hover,
+.visionPanel:hover,
+.topGPanel:hover,
+.toolsBox:hover,
+.philosophyText:hover,
+.photoShowcase:hover,
+.identityCard:active,
+.visionCard:active,
+.projectCard:active,
+.topGCard:active,
+.skillCategory:active,
+.serviceCard:active,
+.visionPanel:active,
+.topGPanel:active,
+.toolsBox:active,
+.philosophyText:active,
+.photoShowcase:active {
+  animation: flipOnce 0.75s ease-in-out 1;
+  border-color: rgba(212, 175, 55, 0.45);
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(59, 130, 246, 0.08)),
+    rgba(255, 255, 255, 0.075);
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.36),
+    0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.identityCard::before,
+.visionCard::before,
+.projectCard::before,
+.topGCard::before,
+.skillCategory::before,
+.serviceCard::before,
+.visionPanel::before,
+.topGPanel::before,
+.toolsBox::before,
+.philosophyText::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.16), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.14), transparent 36%);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.identityCard:hover::before,
+.visionCard:hover::before,
+.projectCard:hover::before,
+.topGCard:hover::before,
+.skillCategory:hover::before,
+.serviceCard:hover::before,
+.visionPanel:hover::before,
+.topGPanel:hover::before,
+.toolsBox:hover::before,
+.philosophyText:hover::before {
+  opacity: 1;
+}
+
+.identityCard > *,
+.visionCard > *,
+.projectCard > *,
+.topGCard > *,
+.skillCategory > *,
+.serviceCard > *,
+.visionPanel > *,
+.topGPanel > *,
+.toolsBox > *,
+.philosophyText > * {
+  position: relative;
+  z-index: 1;
+}
+
+.identityCard,
+.visionCard,
+.projectCard,
+.topGCard,
+.skillCategory,
+.serviceCard {
+  padding: 30px;
+}
+
+.visionPanel,
+.topGPanel,
+.toolsBox,
+.philosophyText {
+  padding: 34px;
+}
+
+.identityCard span,
+.topGCard span,
+.serviceCard span,
+.projectNumber {
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.identityCard h3,
+.visionCard h3,
+.topGCard h3,
+.skillCategory h3,
+.serviceCard h3 {
+  font-size: 24px;
+  margin: 18px 0 12px;
+}
+
+.identityCard p,
+.visionCard p,
+.topGCard p,
+.serviceCard p {
+  color: #94a3b8;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.projectCard {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.featuredProject {
+  grid-column: span 2;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.13), rgba(37, 99, 235, 0.1)),
+    rgba(255, 255, 255, 0.055);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+
+.projectTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.projectStatus {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: #fde68a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.projectCard h3 {
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 0 0 18px;
+}
+
+.projectCard p {
+  color: #cbd5e1;
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.problemBox {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.problemBox strong {
+  display: block;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.problemBox span {
+  color: #94a3b8;
+  line-height: 1.65;
+}
+
+.projectFooter {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.projectFooter span,
+.toolsList span {
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 13px;
+}
+
+.topGBackgroundText {
+  display: none;
+}
+
+.topGContent,
+.topGCards {
+  position: relative;
+  z-index: 2;
+}
+
+.topGIntro {
+  max-width: 800px;
+  color: #cbd5e1;
+  font-size: 21px;
+  line-height: 1.8;
+  margin-top: 28px;
+}
+
+.topGPanel {
+  border-radius: 32px;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.13), rgba(255, 255, 255, 0.055)),
+    rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 24px 100px rgba(0, 0, 0, 0.35);
+}
+
+.topGSlogan {
+  color: #facc15;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.skillIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  color: #050816;
+  background: #d4af37;
+  font-weight: 900;
+  margin-bottom: 24px;
+}
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skillList span {
+  color: #cbd5e1;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.skillList span:last-child {
+  border-bottom: none;
+}
+
+.toolsBox {
+  margin-top: 72px;
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(37, 99, 235, 0.1)),
+    rgba(255, 255, 255, 0.045);
+}
+
+.toolsBox h3 {
+  font-size: 28px;
+  margin: 0 0 24px;
+}
+
+.toolsList,
+.philosophyValues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.toolsList span {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 14px;
+}
+
+.philosophyInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.philosophyQuote {
+  max-width: 1000px;
+  margin: 34px 0 0;
+  color: #facc15;
+  font-size: clamp(30px, 5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  font-weight: 900;
+}
+
+.philosophyGrid {
+  margin-top: 72px;
+}
+
+.philosophyValues {
+  gap: 14px;
+}
+
+.philosophyValues span {
+  padding: 14px 18px;
+  border-radius: 999px;
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.16), rgba(37, 99, 235, 0.09)),
+    rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  font-weight: 700;
+}
+
+.contactCenter {
+  width: 100%;
+  max-width: 1100px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.contactCenter .sectionLabel {
+  margin-bottom: 24px;
+}
+
+.contactCenter h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contactIntro {
+  max-width: 780px;
+  margin: 28px auto 0;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+
+.socialIcon {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  color: white;
+  font-size: 30px;
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.14), rgba(37, 99, 235, 0.12)),
+    rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+  animation: iconFloat 5s ease-in-out infinite;
+}
+
+.socialIcon:hover {
+  transform: translateY(-8px) scale(1.04);
+  border-color: rgba(212, 175, 55, 0.6);
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.28), rgba(37, 99, 235, 0.16)),
+    rgba(255, 255, 255, 0.095);
+  color: #facc15;
+}
+
+.contactHint {
+  margin-top: 24px;
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+.footer {
+  padding: 42px 72px;
+  background: rgba(2, 6, 23, 0.86);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.footer span {
+  color: #d4af37;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.footer small {
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes navDrop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes videoZoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  70% {
+    transform: translateY(24px);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flipOnce {
+  0% {
+    transform: perspective(1200px) rotateY(0deg) translateY(0) scale(1);
+  }
+
+  45% {
+    transform: perspective(1200px) rotateY(180deg) translateY(-8px) scale(1.02);
+  }
+
+  100% {
+    transform: perspective(1200px) rotateY(360deg) translateY(0) scale(1);
+  }
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .skillsGrid,
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .introTitle {
+    font-size: clamp(48px, 8vw, 110px);
+  }
+
+  .navLinks {
+    gap: 18px;
+  }
+
+  .navLinks a {
+    font-size: 13px;
+  }
+
+  .photoShowcase {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1100px) {
+  .projectGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featuredProject {
+    grid-column: span 2;
+  }
+
+  .topGCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .identityCards,
+  .visionCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aboutGrid,
+  .visionContent,
+  .projectsHeader,
+  .topGContent,
+  .skillsHeader,
+  .servicesHeader,
+  .philosophyGrid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    top: 12px;
+    width: calc(100% - 24px);
+    border-radius: 24px;
+    align-items: stretch;
+    gap: 0;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .navTop {
+    width: 100%;
+  }
+
+  .menuButton {
+    display: grid;
+    gap: 5px;
+  }
+
+  .navLinks {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding-top 0.25s ease;
+  }
+
+  .navLinks.showMenu {
+    max-height: 520px;
+    opacity: 1;
+    padding-top: 16px;
+  }
+
+  .navLinks a {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 14px;
+  }
+
+  .navLinks a:hover {
+    background: rgba(212, 175, 55, 0.12);
+  }
+
+  .brand {
+    font-size: 19px;
+  }
+
+  .hero::before,
+  .aboutSection::before,
+  .visionSection::before,
+  .projectsSection::before,
+  .topGSection::before,
+  .skillsSection::before,
+  .servicesSection::before,
+  .philosophySection::before,
+  .contactSection::before {
+    right: -20px;
+    top: 32px;
+    font-size: clamp(72px, 28vw, 140px);
+    letter-spacing: -5px;
+  }
+
+  .hero::after,
+  .aboutSection::after,
+  .visionSection::after,
+  .projectsSection::after,
+  .topGSection::after,
+  .skillsSection::after,
+  .servicesSection::after,
+  .philosophySection::after,
+  .contactSection::after {
+    font-size: clamp(16px, 8vw, 34px);
+    letter-spacing: 6px;
+    opacity: 0.48;
+  }
+
+  .introContent {
+    width: min(100%, calc(100% - 30px));
+    padding-top: 150px;
+  }
+
+  .introKicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 8px 14px;
+  }
+
+  .introTitle {
+    white-space: normal;
+    font-size: clamp(42px, 13vw, 74px);
+    line-height: 0.95;
+    letter-spacing: -2px;
+  }
+
+  .introSubtitle {
+    font-size: 15px;
+    letter-spacing: 2px;
+    line-height: 1.6;
+  }
+
+  .introText {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding: 170px 24px 80px;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .heroText {
+    font-size: 17px;
+  }
+
+  .aboutSection,
+  .visionSection,
+  .projectsSection,
+  .topGSection,
+  .skillsSection,
+  .servicesSection,
+  .philosophySection,
+  .contactSection {
+    padding: 80px 24px;
+  }
+
+  .aboutText p,
+  .visionPanel p,
+  .topGPanel p,
+  .philosophyText p,
+  .contactIntro,
+  .photoContent p {
+    font-size: 17px;
+  }
+
+  .photoShowcase {
+    padding: 22px;
+    gap: 26px;
+  }
+
+  .photoFrame,
+  .photoFrame img {
+    min-height: 380px;
+  }
+
+  .photoContent h3 {
+    letter-spacing: -1px;
+  }
+
+  .identityCards,
+  .visionCards,
+  .projectGrid,
+  .topGCards,
+  .skillsGrid,
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredProject {
+    grid-column: span 1;
+  }
+
+  .visionPanel,
+  .projectCard,
+  .topGPanel,
+  .skillCategory,
+  .toolsBox,
+  .serviceCard,
+  .philosophyText {
+    padding: 24px;
+  }
+
+  .projectCard {
+    min-height: auto;
+  }
+
+  .topGSlogan {
+    font-size: 24px;
+  }
+
+  .philosophyQuote {
+    letter-spacing: -1px;
+  }
+
+  .philosophyValues span {
+    font-size: 14px;
+  }
+
+  .socialIcon {
+    width: 64px;
+    height: 64px;
+    font-size: 25px;
+    border-radius: 20px;
+  }
+
+  .footer {
+    padding: 34px 24px;
+  }
+}
