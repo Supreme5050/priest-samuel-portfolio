@@ -248,11 +248,7 @@ h3,
 }
 
 .typewriter-cursor {
-  display: inline-block;
-  margin-left: 3px;
-  color: var(--primary-2);
-  font-weight: 900;
-  animation: cursorBlink 0.75s step-end infinite;
+  display: none;
 }
 
 .intro-outcomes {
@@ -346,12 +342,6 @@ h3,
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes cursorBlink {
-  50% {
-    opacity: 0;
   }
 }
 
